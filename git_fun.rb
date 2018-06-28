@@ -18,9 +18,11 @@ OptionParser.new do |opts|
 end.parse!
 fail "Path not provided" unless options[:path]
 my_path = options[:path]
+fail "Given path does not exist: " + my_path unless Dir.exist?(my_path)
 Dir.chdir my_path
 my_string = `git branch -a`
 puts "string is: " + my_string
 lines = my_string.chomp.split(/\n/)
-puts lines
+lines.each { |x| puts "line is #{x}" }
+
 
